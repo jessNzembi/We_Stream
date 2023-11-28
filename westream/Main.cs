@@ -8,13 +8,13 @@ using Westream;
 
 public class Program
 {
-  public static void Main(String[] args)
+  public static async Task Main()
   {
     Console.WriteLine("Hello from we stream :)\n");
 
     // Create server instance
     Server westream = new Server();
     westream.start();
-    westream.listenAndServe();
+    await westream.listenAndServe();
   }
 }
