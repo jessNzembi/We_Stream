@@ -1,5 +1,5 @@
 using Gtk;
-using System.Diagnostics;
+using NAudio.Wave;
 
 namespace Westream
 {
@@ -41,6 +41,20 @@ namespace Westream
         wd.Destroy();
       }
     }
+
+    public void onPlayClicked(object o, EventArgs e)
+    {
+      using (
+          var audioFile = new AudioFileReader(
+              "/home/erick/Music/Lofi/samurai-127302.mp3")) using (var outputDevice =
+                                                                       new WaveOutEvent())
+      {
+        outputDevice.Init(audioFile);
+        outputDevice.Play();
+        Console.ReadLine();
+      }
+    }
+
     public void Run() { Application.Run(); }
   }
 }
