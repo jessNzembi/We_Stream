@@ -10,7 +10,6 @@
 
   <ItemGroup>
     <PackageReference Include="GtkSharp" Version="3.24.24.95" />
-    <PackageReference Include="NAudio" Version="2.2.1" />
-  </ItemGroup>
-
+    <PackageReference Include="NetCoreAudio" Version="1.7.0" />
+   </ItemGroup>
 </Project>

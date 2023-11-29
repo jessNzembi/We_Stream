@@ -1,5 +1,6 @@
 using Gtk;
 using NAudio.Wave;
+using NetCoreAudio;
 
 namespace Westream
 {
@@ -44,14 +45,11 @@ namespace Westream
 
     public void onPlayClicked(object o, EventArgs e)
     {
-      using (
-          var audioFile = new AudioFileReader(
-              "/home/erick/Music/Lofi/samurai-127302.mp3")) using (var outputDevice =
-                                                                       new WaveOutEvent())
+      var player = new Player();
+
+      while (true)
       {
-        outputDevice.Init(audioFile);
-        outputDevice.Play();
-        Console.ReadLine();
+        player.Play("/home/erick/Music/Samurai Japanese Lofi HipHop Mix.mp3");
       }
     }
 
