@@ -13,8 +13,10 @@ public class Program
     Console.WriteLine("Hello from we stream :)\n");
 
     // Create server instance
-    Server westream = new Server();
-    westream.start();
-    westream.listenAndServe();
+    // Server westream = new Server();
+    // westream.start();
+    // await westream.listenAndServe();
+    WestreamGui gui = new WestreamGui();
+    gui.Run();
   }
 }
