@@ -10,7 +10,7 @@ namespace Westream
   {
     public MessageType type;
     public String? text;
-    public byte[]? data;
+    public byte[]? data = null;
   }
 
   enum MessageType
