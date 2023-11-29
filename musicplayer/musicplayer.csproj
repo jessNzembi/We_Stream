@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+   <ItemGroup>
+    <PackageReference Include="GtkSharp" Version="3.24.24.95" />
+    <PackageReference Include="ManagedBass" Version="3.1.1" />
+    <PackageReference Include="NetCoreAudio" Version="1.7.0" />
+    <Reference Include="irrKlang.NET4">
+      <HintPath>Lib/irrKlang.NET4.dll</HintPath>
+      <HintPath>Lib/ikpMP3.dll</HintPath>
+      <HintPath>Lib/ikpFlac.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  
+</Project>
