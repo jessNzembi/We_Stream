@@ -1,36 +1,32 @@
 using NetCoreAudio;
-using System;
+using System.Diagnostics;
 
 namespace MusicPlayer
 {
-    public class MusicPlayer
+  public class MusicPlayer
+  {
+    private Player player = new Player();
+    public void setPlayBackFinish()
     {
-        private var player = new Player();
-        public static void setPlayBackFinish() {
-            player.PlaybackFinished += OnPlaybackFinished;
-        }
-
-        public static void PlayMusic(string filename) {
-            player.Play(fileName).Wait();
-        }
-
-        public static void PauseMusic() {
-            player.Pause().Wait();
-        }
-
-        public static void ResumeMusic() {
-            player.Resume().Wait();
-        }
-
-        public static void AdjustVolume(string percentage) {
-            byte volume = Convert.ToByte(percentage);
-            player.SetVolume(volume).Wait();
-        }
-
-        private static void OnPlaybackFinished(object sender, EventArgs e)
-        {
-            // be used to play next songs that are added to the list
-            Console.WriteLine("Playback finished");
-        }
+      player.PlaybackFinished += OnPlaybackFinished;
     }
+
+    public void PlayMusic(string path) { player.Play(path).Wait(); }
+
+    public void PauseMusic() { player.Pause().Wait(); }
+
+    public void ResumeMusic() { player.Resume().Wait(); }
+
+    public void AdjustVolume(string percentage)
+    {
+      byte volume = Convert.ToByte(percentage);
+      player.SetVolume(volume).Wait();
+    }
+
+    private void OnPlaybackFinished(object sender, EventArgs e)
+    {
+      // be used to play next songs that are added to the list
+      Debug.WriteLine("Playback finished");
+    }
+  }
 }
