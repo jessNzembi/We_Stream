@@ -1,8 +1,26 @@
-
 # WeStream
 
 This is a music streaming platform built using C#
 
+## Features
+
+### Channel Creation
+Craft your own music haven by creating channels tailored to your taste.
+
+### Shareable Experience 
+Share your channel link with friends, enabling them to join and synchronize the music playback in real-time.
+
+### Collaborative Playlists
+Everyone in the channel can contribute by adding their favorite songs, ensuring a diverse and dynamic playlist.
+
+### Unified Listening
+Whether you're across the room or miles apart, as long as you're in the same network, enjoy the same beats simultaneously with friends.
+
+### Intuitive Controls 
+Use the app as a music player with easy-to-use controls—play, pause, stop, and skip to the next track seamlessly.
+
+### Interactive Reactions
+Express yourself in real-time! React to the music and share your emotions with custom reactions, adding a whole new layer to the shared experience.
 
 ## Contributing
 
