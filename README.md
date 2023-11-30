@@ -4,14 +4,14 @@ This is a music streaming platform built using C#
 
 ## Features
 
-### Channel Creation
 ![Screenshot from 2023-11-30 10-02-26](https://github.com/jessNzembi/We_Stream/assets/88373252/b4a24726-61b2-46f0-ae65-c5830201f87a)
-
+### Channel Creation
 Craft your own music haven by creating channels tailored to your taste.
 
 ### Shareable Experience 
 Share your channel link with friends, enabling them to join and synchronize the music playback in real-time.
 
+![Screenshot from 2023-11-30 10-02-21](https://github.com/jessNzembi/We_Stream/assets/88373252/ee764934-98b8-4fb3-9cba-047a63f77dfa)
 ### Collaborative Playlists
 Everyone in the channel can contribute by adding their favorite songs, ensuring a diverse and dynamic playlist.
 
