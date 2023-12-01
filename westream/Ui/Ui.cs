@@ -1,5 +1,5 @@
 using Gtk;
-using NAudio.Wave;
+using NetCoreAudio;
 
 namespace Westream
 {
@@ -7,6 +7,9 @@ namespace Westream
   {
     private Window mWindowInstance;
     private Builder mBuilder;
+    private Server? mServer;
+    private Client? mClient;
+    private Thread? mComThread;
 
     public WestreamGui()
     {
@@ -17,11 +20,6 @@ namespace Westream
       mWindowInstance = (Window)mBuilder.GetObject("window");
 
       mWindowInstance.DeleteEvent += (o, e) => Application.Quit();
-      //
-      // var button = new Button("Click me");
-      // button.Clicked += (o, e) => Console.WriteLine("Button clicked");
-
-      // mWindowInstance.Add(button);
       mWindowInstance.ShowAll();
     }
 
@@ -39,19 +37,30 @@ namespace Westream
         wd.Title = "Form Error";
         wd.Run();
         wd.Destroy();
+        return;
       }
+
+      // Create a client
+      mClient = new Client(usernameEntry.Text.Trim(), roomEntry.Text.Trim());
     }
+
+    public void onCreateServer(object sender, EventArgs e)
+    {
+
+      mServer = new Server();
+      mServer.start();
+      mComThread = new Thread(new ThreadStart(mServer!.ListenAndServe));
+    }
+
+    public void onJoinServerClicked(object sender, EventArgs e) { }
 
     public void onPlayClicked(object o, EventArgs e)
     {
-      using (
-          var audioFile = new AudioFileReader(
-              "/home/erick/Music/Lofi/samurai-127302.mp3")) using (var outputDevice =
-                                                                       new WaveOutEvent())
+      var player = new Player();
+
+      while (true)
       {
-        outputDevice.Init(audioFile);
-        outputDevice.Play();
-        Console.ReadLine();
+        player.Play("/home/erick/Music/Samurai Japanese Lofi HipHop Mix.mp3");
       }
     }
 

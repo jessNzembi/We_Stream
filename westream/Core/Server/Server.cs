@@ -40,7 +40,7 @@ namespace Westream
       mServerInstance.Start();
     }
 
-    public async Task handleNewClients()
+    public void handleNewClients()
     {
       if (mServerInstance.Pending())
       {
@@ -50,7 +50,7 @@ namespace Westream
         // Read the username
         NetworkStream ns = client.GetStream();
         var msg = new byte[Constants.PACKET_SIZE];
-        var bytesRead = await ns.ReadAsync(msg, 0, msg.Length);
+        var bytesRead = ns.Read(msg, 0, msg.Length);
 
         string jsonString = System.Text.Encoding.UTF8.GetString(msg);
         var message = JsonSerializer.Deserialize<Message>(jsonString);
@@ -63,7 +63,7 @@ namespace Westream
 
         msg = System.Text.Encoding.Default.GetBytes(
             JsonSerializer.Serialize(okMsg));
-        await ns.WriteAsync(msg, 0, msg.Length);
+        ns.Write(msg, 0, msg.Length);
 
         // Alert the others
         Message pingMsg = new Message();
@@ -76,14 +76,14 @@ namespace Westream
           {
             msg = System.Text.Encoding.Default.GetBytes(
                 JsonSerializer.Serialize(pingMsg));
-            await c.Value.GetStream().WriteAsync(msg, 0, msg.Length);
+            c.Value.GetStream().Write(msg, 0, msg.Length);
           }
         }
         Debug.WriteLine("[+] Client Connected and Ready");
       }
     }
 
-    public async Task handleRequests()
+    public void handleRequests()
     {
       foreach (var client in mClients)
       {
@@ -104,19 +104,19 @@ namespace Westream
             foreach (var c in mClients)
             {
               var netStream = client.Value.GetStream();
-              await netStream.WriteAsync(msg, 0, msg.Length);
+              netStream.Write(msg, 0, msg.Length);
             }
           }
         }
       }
     }
 
-    public async Task listenAndServe()
+    public void ListenAndServe()
     {
       while (true)
       {
-        await handleNewClients();
-        await handleRequests();
+        handleNewClients();
+        handleRequests();
       }
     }
   }
