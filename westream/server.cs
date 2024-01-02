@@ -1,25 +1,25 @@
 ﻿using System;
 using System.Net;
 using System.Text;
-using WebSocketSharp;
-using WebSocketSharp.Server;
+// using WebSocketSharp;
+// using WebSocketSharp.Server;
 using System.Net.Sockets;
 
 namespace csharpserver;
 
-class Echo: WebSocketBehavior {
-    protected override void OnMessage(MessageEventArgs e) {
-        Console.WriteLine("Received Message From Client: " + e.Data);
-        Send(e.Data);
-    }
-}
+// class Echo: WebSocketBehavior {
+//     protected override void OnMessage(MessageEventArgs e) {
+//         Console.WriteLine("Received Message From Client: " + e.Data);
+//         Send(e.Data);
+//     }
+// }
 
-class EchoAll: WebSocketBehavior {
-    protected override void OnMessage(MessageEventArgs e) {
-        Console.WriteLine("Received Message From EchoAll Client: " + e.Data);
-        Sessions.Broadcast(e.Data);
-    }
-}
+// class EchoAll: WebSocketBehavior {
+//     protected override void OnMessage(MessageEventArgs e) {
+//         Console.WriteLine("Received Message From EchoAll Client: " + e.Data);
+//         Sessions.Broadcast(e.Data);
+//     }
+// }
 
 class Program{
     // static void Main(string[] args) {
