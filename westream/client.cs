@@ -41,13 +41,15 @@ class SocketClient {
                 int bytesSent = sender.Send(msg);
 
                 // Receive the response from the remote device.
-                int bytesRec = sender.Receive(bytes);
-                Console.WriteLine("Echoed test = {0}",
+                while (true) {
+                    int bytesRec = sender.Receive(bytes);
+                    Console.WriteLine("Echoed test = {0}",
                     Encoding.ASCII.GetString(bytes, 0, bytesRec));
-
+                }
+        
                 // Release the socket.
-                sender.Shutdown(SocketShutdown.Both); // to be implemented as functions
-                sender.Close(); // to be implemented as functions
+                // sender.Shutdown(SocketShutdown.Both); // to be implemented as functions
+                // sender.Close(); // to be implemented as functions
 
             }
             catch (ArgumentNullException ane) {

@@ -50,33 +50,37 @@ class Program{
             // A Socket must be associated with an endpoint using the Bind method
             listener.Bind(localEndPoint);
 
-            // puts the socket in a listening mode
-            listener.Listen();
+            // loop used to keep the connection alive
+            while(true){
+                 // puts the socket in a listening mode
+                listener.Listen();
 
-            Console.WriteLine("Waiting for a connection...");
-            Socket handler = listener.Accept();
+                Console.WriteLine("Waiting for a connection...");
+                Socket handler = listener.Accept();
 
-             // Incoming data from the client.
-             string data = null;
-             byte[] bytes = null;
+                // Incoming data from the client.
+                string data = null;
+                byte[] bytes = null;
 
-            while (true)
-            {
-                bytes = new byte[1024];
-                int bytesRec = handler.Receive(bytes);
-                data += Encoding.ASCII.GetString(bytes, 0, bytesRec);
-                if (data.IndexOf("<EOF>") > -1)
-                {
-                    break;
+                while (true) {
+                    bytes = new byte[1024];
+                    int bytesRec = handler.Receive(bytes);
+                    data += Encoding.ASCII.GetString(bytes, 0, bytesRec);
+                    if (data.IndexOf("<EOF>") > -1)
+                    {
+                        break;
+                    }
                 }
+
+                Console.WriteLine("Text received : {0}", data);
+
+                byte[] msg = Encoding.ASCII.GetBytes(data);
+                handler.Send(msg); // implement broadcasting here
             }
+           
 
-            Console.WriteLine("Text received : {0}", data);
-
-            byte[] msg = Encoding.ASCII.GetBytes(data);
-            handler.Send(msg); // implement broadcasting here
-            handler.Shutdown(SocketShutdown.Both); // disables sends and receives from on a Socket
-            handler.Close(); // Closes the connection to be implemented as a different method
+            // handler.Shutdown(SocketShutdown.Both); // disables sends and receives from on a Socket
+            // handler.Close(); // Closes the connection to be implemented as a different method
         }
         catch (Exception e)
         {
