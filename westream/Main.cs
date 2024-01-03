@@ -18,6 +18,9 @@ class ProgramEntry{
                 Console.WriteLine("Joining Channel");
                 SocketClient.StartClient();
                 break;
+            case "3":
+                Console.WriteLine("I Just Want To Vibe Alone");
+                break;
             default:
                 Console.WriteLine("Opps Wrong Choice");
                 break;
