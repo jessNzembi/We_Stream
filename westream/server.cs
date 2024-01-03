@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Text;
 // using WebSocketSharp;
@@ -38,6 +39,9 @@ class Program{
     //     Console.WriteLine("Stopped the Server");
     // }
 
+    // a listo hold all the connected clients
+    private static List<Socket> connected_clients = new List<Socket>();
+
     public static void StartServer() {
         IPHostEntry host = Dns.GetHostEntry("localhost");
         IPAddress ipAddress = host.AddressList[0];
@@ -58,6 +62,11 @@ class Program{
                 Console.WriteLine("Waiting for a connection...");
                 Socket handler = listener.Accept();
 
+                // adding the new client in the list of connected clients
+                if (connected_clients.Contains(handler) == false) {
+                    connected_clients.Add(handler);
+                }
+
                 // Incoming data from the client.
                 string data = null;
                 byte[] bytes = null;
@@ -75,7 +84,8 @@ class Program{
                 Console.WriteLine("Text received : {0}", data);
 
                 byte[] msg = Encoding.ASCII.GetBytes(data);
-                handler.Send(msg); // implement broadcasting here
+                handler.Send(msg);
+                BroadCast(connected_clients, handler, msg); //broadcasting the message
             }
            
 
@@ -89,5 +99,19 @@ class Program{
 
         Console.WriteLine("\n Press any key to continue...");
         Console.ReadKey();
+    }
+
+    private static void BroadCast(List<Socket> connected_clients, Socket sender, byte[] msg) {
+        /**
+        * Used to Broadcast the message to all clients
+        * connected_clients: A list of connected clients
+        * sender: the current client/server sending the message
+        * msg: the message to be sent to the client
+        */
+        foreach (Socket client in connected_clients) {
+            if (client != sender) {
+                client.Send(msg);
+            } 
+        }
     }
 }
