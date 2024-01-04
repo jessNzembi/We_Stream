@@ -19,7 +19,8 @@ namespace Westream
       mBuilder.Autoconnect(this);
       mWindowInstance = (Window)mBuilder.GetObject("window");
 
-      mWindowInstance.DeleteEvent += (o, e) => Application.Quit();
+      //mWindowInstance.DeleteEvent += (o, e) => Application.Quit();
+	  mWindowInstance.DeleteEvent += Window_DeleteEvent;
       mWindowInstance.ShowAll();
     }
 
@@ -41,9 +42,13 @@ namespace Westream
           return;
 		}
 
-		player.Play(SongPath.Text).Wait();
-		Console.WriteLine(player.Playing ? "Playback started" : "Could not start the playback");
-
+		while (true)
+		{
+			player.Play(SongPath.Text).Wait();
+			Console.WriteLine(player.Playing ? "Playback started" : "Could not start the playback");
+			break;
+		}
+		
 	}
 
 	public void onPauseClicked(object o, EventArgs e)
@@ -62,6 +67,13 @@ namespace Westream
 	{
 		player.Stop().Wait();
 		Console.WriteLine(!player.Playing ? "Playback stopped" : "Could not stop the playback");
+	}
+
+	private void Window_DeleteEvent(object o, DeleteEventArgs args)
+	{
+		player.Stop().Wait();
+		Console.WriteLine(!player.Playing ? "Playback stopped" : "Could not stop the playback");
+		Application.Quit();
 	}
 
     public void Run() { Application.Run(); }
