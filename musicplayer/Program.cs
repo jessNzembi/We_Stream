@@ -1,48 +1,11 @@
-﻿// using IrrKlang; 
-
-// namespace HelloWorld
-// {
-//   class Example
-//   {
-//    [STAThread]
-//    static void Main(string[] args)
-//    {
-//      // start up the engine
-//      ISoundEngine engine = new ISoundEngine();
-
-//      // play a sound file
-//      engine.Play2D("somefile.mp3");
-
-//      // wait until user presses ok to end application
-//      System.Windows.Forms.MessageBox.Show(
-// 	 	 	 "Playing, press ok to end.");
-
-//    } // end main()
-
-//   } // end class
-
-// } // end namespace
-// string PathToMp3File = "Talk.mp3";
-
-// System.Diagnostics.Process PulseAudioStart = System.Diagnostics.Process.Start("pactl", "info");
-// PulseAudioStart.WaitForExit();
-// if(PulseAudioStart.ExitCode != 0)
-//     throw new Exception($"Failed to initialize the PulseAudio daemon: {PulseAudioStart.ExitCode}");
-
-// System.Diagnostics.Process MpvStart = System.Diagnostics.Process.Start("mpv", $"--no-video --gapless-audio --volume=100.0 {PathToMp3File}");
-// MpvStart.WaitForExit();
-// if(MpvStart.ExitCode != 0)
-//     throw new Exception($"Failed to start the player: {MpvStart.ExitCode}");
-
-
-using NetCoreAudio;
+﻿using NetCoreAudio;
 using System;
 
-namespace DemoHarness
+namespace Westream
 {
     public class Program
     {
-        private static void Main(string[] args)
+        private static void NotMain(string[] args)
         {
             var player = new Player();
             player.PlaybackFinished += OnPlaybackFinished;
