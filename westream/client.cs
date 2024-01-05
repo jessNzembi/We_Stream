@@ -2,6 +2,7 @@ using System;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.IO;
 
 namespace csharpclient;
 // Client app is the one sending messages to a Server/listener.
@@ -41,10 +42,20 @@ class SocketClient {
                 int bytesSent = sender.Send(msg);
 
                 // Receive the response from the remote device.
-                while (true) {
-                    int bytesRec = sender.Receive(bytes);
-                    Console.WriteLine("Echoed test = {0}",
-                    Encoding.ASCII.GetString(bytes, 0, bytesRec));
+                // while (true) {
+                //     int bytesRec = sender.Receive(bytes);
+                //     Console.WriteLine("Echoed test = {0}",
+                //     Encoding.ASCII.GetString(bytes, 0, bytesRec));
+                // }
+                // Buffer to store received data.
+                byte[] buffer = new byte[1024];
+                int bytesReceived;
+
+                // Write the received data to a file.
+                using (FileStream fs = File.Create("receivedFile.mp3")) {
+                    while ((bytesReceived = sender.Receive(buffer)) > 0) {
+                        fs.Write(buffer, 0, bytesReceived);
+                    }
                 }
         
                 // Release the socket.

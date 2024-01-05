@@ -83,9 +83,14 @@ class Program{
 
                 Console.WriteLine("Text received : {0}", data);
 
-                byte[] msg = Encoding.ASCII.GetBytes(data);
-                handler.Send(msg);
-                BroadCast(connected_clients, handler, msg); //broadcasting the message
+                // byte[] msg = Encoding.ASCII.GetBytes(data);
+                // handler.Send(msg);
+                // BroadCast(connected_clients, handler, msg); //broadcasting the message
+
+                // testing sending a file
+                string fileName = "Talk.mp3";
+                Console.WriteLine("Sending {0} to the host.", fileName);
+                handler.SendFile(fileName);
             }
            
 
